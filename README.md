@@ -27,6 +27,7 @@ It separates **what the UI shows** (name, hint, icon, shortcut) from **what it d
 - [Threading & Actors](#threading--actors)
 - [Token Conventions](#token-conventions)
 - [FAQ](#faq)
+- [Sample Code](#sample-code)
 - [License](#license)
 
 ---
@@ -358,6 +359,12 @@ A: Window scope actions are tied to a specific document or window, and override 
 
 **Q: Does APGIntentKit support SwiftUI or iOS?**  
 A: Currently the adapters are macOS AppKit-based. SwiftUI and UIKit support are on the roadmap.
+
+---
+
+### Sample Code
+
+The APGExample can be found at [Repository](https://github.com/magesteve/APGExample).
 
 ---
 
