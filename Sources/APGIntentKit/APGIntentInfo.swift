@@ -19,7 +19,7 @@ public struct APGIntentInfo: Hashable, Sendable {
     // MARK: - Properties
 
     /// Globally unique  token for the info.
-    public let token: APGIntentToken
+    public let token: String
     
     /// Human-readable name of the info.
     public let name: String
@@ -78,7 +78,7 @@ public struct APGIntentInfo: Hashable, Sendable {
     ///   - hint: Optional Hint of the purpose or function.
     ///   - symbolName: Optional Symbol Icon name used in toolbars or menus.
     ///   - menuKey: Optional menu shortcut key (e.g., 'n' for ⌘N).
-    public init(token: APGIntentToken,
+    public init(token: String,
                 name: String,
                 alwaysOn: Bool = true,
                 shortName: String? = nil,
@@ -137,13 +137,13 @@ public final class APGIntentInfoList {
     /// Look up an info by its unique token.
     /// - Parameter token: The token to search for.
     /// - Returns: The matching `APGIntentInfo`, or nil if not found.
-    public func find(token: APGIntentToken) -> APGIntentInfo? {
+    public func find(token: String) -> APGIntentInfo? {
         infoList.first { $0.token == token }
     }
 
     /// Check if the list already contains an info with the given token.
     /// - Parameter token: The token to check.
-    public func contains(token: APGIntentToken) -> Bool {
+    public func contains(token: String) -> Bool {
         infoList.contains { $0.token == token }
     }
 }

@@ -23,7 +23,7 @@ public class APGIntentMacTools {
     /// - Parameters:
     ///   - name: The title for the new menu (e.g. 'Tools').
     ///   - tokens: An array of tokens to appear inside it.
-    public static func addMenuBeforeHelp(named name: String, tokens: [APGIntentToken]) {
+    public static func addMenuBeforeHelp(named name: String, tokens: [String]) {
         guard let mainMenu = NSApp.mainMenu else { return }
 
         // Build the submenu
@@ -33,7 +33,7 @@ public class APGIntentMacTools {
         }
 
         // Top-level item containing that submenu
-        let menuItem = NSMenuItem(title: name, action: nil, keyEquivalent: "")
+        let menuItem = NSMenuItem(title: name, action: nil, keyEquivalent: String())
         menuItem.submenu = submenu
 
         // Find the Help menu via NSApp.helpMenu (already localized)
@@ -47,8 +47,8 @@ public class APGIntentMacTools {
     }
     
     /// Add Apple Menu Items
-    public static func addAppMenuIntents(about aboutTokens: [APGIntentToken] = [],
-                                         settings settingsTokens: [APGIntentToken] = []) {
+    public static func addAppMenuIntents(about aboutTokens: [String] = [],
+                                         settings settingsTokens: [String] = []) {
         guard !(aboutTokens.isEmpty && settingsTokens.isEmpty) else { return }
 
         guard let appName = Bundle.main.object(forInfoDictionaryKey: kCFBundleNameKey as String) as? String else { return }
@@ -65,7 +65,7 @@ public class APGIntentMacTools {
     }
     
     /// Add Help Menu Items
-    public static func addHelpMenuIntents(help helpTokens: [APGIntentToken]) {
+    public static func addHelpMenuIntents(help helpTokens: [String]) {
         guard !helpTokens.isEmpty else { return }
 
         guard let helpSubmenu = NSApp.helpMenu else { return }
@@ -76,7 +76,7 @@ public class APGIntentMacTools {
         }
     }
     
-    static func replaceItem(menu: NSMenu, at index: Int, with newTokens: [APGIntentToken]) {
+    static func replaceItem(menu: NSMenu, at index: Int, with newTokens: [String]) {
         guard index >= 0 && index < menu.items.count else { return }
         
         // Remove the old item

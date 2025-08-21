@@ -16,9 +16,12 @@ import Cocoa
 public class APGIntentMacButton: NSButton, @preconcurrency APGIntentMacUIProtocol {
 
     /// Custom identifier string for tracking or lookup (editable in IB)
-    public var token: APGIntentToken = String() {
+    public var token: String = String() {
         didSet { updateFromToken() }
     }
+    
+    /// Optional parameter for action
+    public var param: String = String()
 
     /// Default title captured from intent
     var defaultTitle = String()
@@ -26,7 +29,7 @@ public class APGIntentMacButton: NSButton, @preconcurrency APGIntentMacUIProtoco
     // MARK: - Inits
 
     /// Programmatic init
-    init(token: APGIntentToken) {
+    init(token: String, param: String = String()) {
         self.token = token
         super.init(frame: .zero)
         commonSetup()
@@ -89,7 +92,7 @@ public class APGIntentMacButton: NSButton, @preconcurrency APGIntentMacUIProtoco
               let action = APGIntentMacWindowHelper.findWindowActionInfo(window: window, token: token)
         else { return }
 
-        action.actionBlock()
+        action.actionBlock(param)
     }
 
     // (Optional) Persist token if you archive this view yourself

@@ -58,7 +58,7 @@ public class APGIntentMacWindowHelper: NSObject, NSToolbarDelegate {
         return nil
     }
     /// Find Action for token (checking window and app level list)
-    public static func findTopmostActionInfo(token: APGIntentToken) -> APGIntentAction? {
+    public static func findTopmostActionInfo(token: String) -> APGIntentAction? {
         if let helper = findTopmostHelper() {
             if let action = helper.windowListActionInfo.find(token: token) {
                 return action
@@ -69,7 +69,7 @@ public class APGIntentMacWindowHelper: NSObject, NSToolbarDelegate {
     }
     
     /// FInd action for given window
-    public static func findWindowActionInfo(window: NSWindow?, token: APGIntentToken) -> APGIntentAction? {
+    public static func findWindowActionInfo(window: NSWindow?, token: String) -> APGIntentAction? {
         if let window, window.isVisible, let controller = window.windowController {
             if let prot = controller as? APGIntentMacWindowProtocol {
                 if let action = prot.intentHelper.windowListActionInfo.find(token: token) {
@@ -82,14 +82,14 @@ public class APGIntentMacWindowHelper: NSObject, NSToolbarDelegate {
     }
     
     /// Add create and add new action to window
-    public func addWindowAction(token: APGIntentToken,
+    public func addWindowAction(token: String,
                           action: @escaping APGIntentActionClosure,
                           appearance: @escaping APGIntentAppearanceClosure) {
         windowListActionInfo.addAction(token: token, action: action, appearance: appearance)
     }
 
     /// Add create and add new action to window (no appearance)
-    public func addWindowAction(token: APGIntentToken,
+    public func addWindowAction(token: String,
                           action: @escaping APGIntentActionClosure) {
         windowListActionInfo.addAction(token: token, action: action)
     }

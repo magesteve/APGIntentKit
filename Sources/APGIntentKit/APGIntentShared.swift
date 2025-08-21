@@ -23,14 +23,11 @@ public let kAPGIntentKeyPrefix = "apgintent-"
 
 // MARK: - Typealias
 
-/// Type of token (String currently)
-public typealias APGIntentToken = String
-
 /// Simple closure with no results or paramts
-public typealias APGIntentActionClosure = @Sendable @MainActor () -> Void
+public typealias APGIntentActionClosure = @Sendable @MainActor (String) -> Void
 
 /// Returns: (enabled, isChecked?, overriddenTitle?)
-public typealias APGIntentAppearanceClosure = @Sendable () -> (Bool, Bool?, String?)
+public typealias APGIntentAppearanceClosure = @Sendable (String) -> (Bool, Bool?, String?)
 
 // MARK: - Protocol
 
@@ -38,7 +35,7 @@ public typealias APGIntentAppearanceClosure = @Sendable () -> (Bool, Bool?, Stri
 public protocol APGIntentMacUIProtocol {
     
     /// Token
-    var token: APGIntentToken { get set }
+    var token: String { get set }
     
     /// Validate UI
     func intentValidateUI()

@@ -21,7 +21,10 @@ public final class APGIntentMenuItem: NSMenuItem {
     // MARK: - Stored Properties
 
     /// The unique token of the intent this menu item represents.
-    public var token: APGIntentToken
+    public var token: String
+    
+    /// Optional param data for action.
+    public var param: String = String()
     
     /// Always on? No special validation
     public var alwaysOn: Bool
@@ -29,8 +32,11 @@ public final class APGIntentMenuItem: NSMenuItem {
     // MARK: - Initializer
 
     /// Create a new menu item for a given intent token.
-    /// - Parameter token: The token of the intent to link.
-    public init(token: APGIntentToken) {
+    /// - Parameters:
+    ///   - token: The token of the intent to link.
+    ///   - param: Optional param data for action.
+    public init(token: String,
+                param: String = String()) {
         self.token = token
 
         let intentInfo = APGIntentInfoList.shared.find(token: token)
@@ -57,7 +63,7 @@ public final class APGIntentMenuItem: NSMenuItem {
     @objc private func performIntent(_ sender: Any?) {
         guard let action = APGIntentMacWindowHelper.findTopmostActionInfo(token: token) else { return }
 
-        action.actionBlock()
+        action.actionBlock(param)
     }
 
 
@@ -75,7 +81,7 @@ extension APGIntentMenuItem: NSMenuItemValidation {
         
         guard let block = action.appearanceBlock else { return true }
 
-        let (isEnabled, isMarked, title) = block()
+        let (isEnabled, isMarked, title) = block(param)
         
         if let title {
             menuItem.title = title

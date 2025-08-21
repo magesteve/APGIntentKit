@@ -61,21 +61,13 @@ The macOS adapters are wrapped in `#if os(macOS)`.
 
 ## Concepts
 
-### APGIntentToken
-
-A `typealias` for `String`. It uniquely identifies a command/intent.
-
-```swift
-public typealias APGIntentToken = String
-```
-
 ### APGIntentInfo
 
 UI metadata the user sees:
 
 ```swift
 public struct APGIntentInfo: Hashable, Sendable {
-    public let token: APGIntentToken
+    public let token: String
     public let name: String
     public let alwaysOn: Bool
     public let shortName: String?

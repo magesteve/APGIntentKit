@@ -21,7 +21,10 @@ public final class APGIntentToolbarItem: NSToolbarItem {
     // MARK: - Stored Properties
 
     /// The unique token of the intent this toolbar item represents.
-    public let token: APGIntentToken
+    public let token: String
+    
+    /// Optional param data for action.
+    public var param: String = ""
 
     /// Always on?
     public private(set) var alwaysOn: Bool = false
@@ -45,7 +48,7 @@ public final class APGIntentToolbarItem: NSToolbarItem {
     /// - Parameters:
     ///   - token: The token of the intent to link.
     ///   - helper: Window helper to resolve window-scoped actions/appearance.
-    public init(token: APGIntentToken, helper: APGIntentMacWindowHelper?) {
+    public init(token: String, helper: APGIntentMacWindowHelper?) {
         self.token = token
         self.helper = helper
 
@@ -114,7 +117,7 @@ public final class APGIntentToolbarItem: NSToolbarItem {
     @objc private func performIntent(_ sender: Any?) {
         guard let window = self.helper?.window else { return }
         guard let action = APGIntentMacWindowHelper.findWindowActionInfo(window: window, token: token) else { return }
-        action.actionBlock()
+        action.actionBlock(param)
     }
 
     // MARK: - Validation
@@ -138,7 +141,7 @@ public final class APGIntentToolbarItem: NSToolbarItem {
         }
 
         if let block = action.appearanceBlock {
-            let (enabled, marked, text) = block()
+            let (enabled, marked, text) = block(param)
 
             // Update check/mark state and symbol if changed
             if let marked, marked != currentlyMarked {
