@@ -59,15 +59,16 @@ public class APGIntentMacTools {
             }
         }
 
-        if !aboutTokens.isEmpty {
-            replaceItem(menu: appSubmenu, at: 0, with: aboutTokens)
+        if let aboutTokens {
+            if !aboutTokens.isEmpty {
+                replaceItem(menu: appSubmenu, at: 0, with: aboutTokens)
+            }
         }
     }
     
     /// Add File Menu Items
     public static func addFileMenuIntents(about newTokens: [String]? = nil,
                                          settings openTokens: [String]? = nil) {
-        guard !(newTokens.isEmpty && openTokens.isEmpty) else { return }
         guard let mainMenu = NSApp.mainMenu else { return }
 
         let newSel  = #selector(NSDocumentController.newDocument(_:))
@@ -88,11 +89,15 @@ public class APGIntentMacTools {
 
         guard let menu = fileSubmenu else { return }
 
-        if let oi = openIndex, !openTokens.isEmpty {
-            replaceItem(menu: menu, at: oi, with: openTokens)
+        if let openTokens {
+            if let oi = openIndex, !openTokens.isEmpty {
+                replaceItem(menu: menu, at: oi, with: openTokens)
+            }
         }
-        if let ni = newIndex, !newTokens.isEmpty {
-            replaceItem(menu: menu, at: ni, with: newTokens)
+        if let newTokens {
+            if let ni = newIndex, !newTokens.isEmpty {
+                replaceItem(menu: menu, at: ni, with: newTokens)
+            }
         }
     }
     
