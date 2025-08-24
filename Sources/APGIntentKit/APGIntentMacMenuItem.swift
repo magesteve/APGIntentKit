@@ -73,6 +73,10 @@ public final class APGIntentMenuItem: NSMenuItem {
 
 extension APGIntentMenuItem: NSMenuItemValidation {
     public func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
+        if menuItem.isSeparatorItem {
+            return false
+        }
+
         if alwaysOn {
             return true
         }

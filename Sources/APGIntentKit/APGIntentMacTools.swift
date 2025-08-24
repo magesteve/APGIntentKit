@@ -108,8 +108,14 @@ public class APGIntentMacTools {
         guard let helpSubmenu = NSApp.helpMenu else { return }
 
         for token in helpTokens {
-            let newItem = APGIntentMenuItem(token: token)
-            helpSubmenu.addItem(newItem)
+            if token.isEmpty {
+                let newItem = NSMenuItem.separator()
+                helpSubmenu.addItem(newItem)
+            }
+            else {
+                let newItem = APGIntentMenuItem(token: token)
+                helpSubmenu.addItem(newItem)
+            }
         }
     }
     
@@ -123,7 +129,6 @@ public class APGIntentMacTools {
         for (offset, token) in newTokens.enumerated() {
             if token.isEmpty {
                 let item = NSMenuItem.separator()
-                item.isEnabled = false
                 menu.insertItem(item, at: index + offset)
             }
             else {
