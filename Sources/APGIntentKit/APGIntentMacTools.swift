@@ -47,20 +47,52 @@ public class APGIntentMacTools {
     }
     
     /// Add Apple Menu Items
-    public static func addAppMenuIntents(about aboutTokens: [String] = [],
-                                         settings settingsTokens: [String] = []) {
-        guard !(aboutTokens.isEmpty && settingsTokens.isEmpty) else { return }
-
+    public static func addAppMenuIntents(about aboutTokens: [String]? = nil,
+                                         settings settingsTokens: [String]? = nil) {
         guard let appName = Bundle.main.object(forInfoDictionaryKey: kCFBundleNameKey as String) as? String else { return }
         
         guard let appSubmenu = APGIntentMacTools.findNamedMenu(appName) else { return }
 
-        if !settingsTokens.isEmpty {
-            replaceItem(menu: appSubmenu, at: 2, with: settingsTokens)
+        if let settingsTokens {
+            if !settingsTokens.isEmpty {
+                replaceItem(menu: appSubmenu, at: 2, with: settingsTokens)
+            }
         }
 
         if !aboutTokens.isEmpty {
             replaceItem(menu: appSubmenu, at: 0, with: aboutTokens)
+        }
+    }
+    
+    /// Add File Menu Items
+    public static func addFileMenuIntents(about newTokens: [String]? = nil,
+                                         settings openTokens: [String]? = nil) {
+        guard !(newTokens.isEmpty && openTokens.isEmpty) else { return }
+        guard let mainMenu = NSApp.mainMenu else { return }
+
+        let newSel  = #selector(NSDocumentController.newDocument(_:))
+        let openSel = #selector(NSDocumentController.openDocument(_:))
+
+        var fileSubmenu: NSMenu?
+        var newIndex: Int?
+        var openIndex: Int?
+
+        outer: for item in mainMenu.items {
+            guard let submenu = item.submenu else { continue }
+            for (idx, mi) in submenu.items.enumerated() {
+                if mi.action == newSel { fileSubmenu = submenu; newIndex = idx }
+                if mi.action == openSel { fileSubmenu = submenu; openIndex = idx }
+            }
+            if fileSubmenu != nil { break outer }
+        }
+
+        guard let menu = fileSubmenu else { return }
+
+        if let oi = openIndex, !openTokens.isEmpty {
+            replaceItem(menu: menu, at: oi, with: openTokens)
+        }
+        if let ni = newIndex, !newTokens.isEmpty {
+            replaceItem(menu: menu, at: ni, with: newTokens)
         }
     }
     
@@ -85,7 +117,9 @@ public class APGIntentMacTools {
         // Insert new items at that index in order
         for (offset, token) in newTokens.enumerated() {
             if token.isEmpty {
-                menu.insertItem(NSMenuItem.separator(), at: index + offset)
+                let item = NSMenuItem.separator()
+                item.isEnabled = false
+                menu.insertItem(item, at: index + offset)
             }
             else {
                 let item = APGIntentMenuItem(token: token)
