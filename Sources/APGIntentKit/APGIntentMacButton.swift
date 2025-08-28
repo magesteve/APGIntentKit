@@ -6,8 +6,10 @@
 //
 //  Subclass of NSButton that uses Intents
 
-#if os(macOS)
-import Cocoa
+#if canImport(AppKit)
+
+import Foundation
+import AppKit
 
 // MARK: - Class
 
@@ -15,6 +17,8 @@ import Cocoa
 @MainActor
 public class APGIntentMacButton: NSButton, @preconcurrency APGIntentMacUIProtocol {
 
+    // MARK: - fields
+    
     /// Custom identifier string for tracking or lookup (editable in IB)
     public var token: String = String() {
         didSet { updateFromToken() }
@@ -98,7 +102,7 @@ public class APGIntentMacButton: NSButton, @preconcurrency APGIntentMacUIProtoco
     // (Optional) Persist token if you archive this view yourself
     public override func encode(with coder: NSCoder) {
         super.encode(with: coder)
-        coder.encode(token, forKey: kAPGIntentCoderToken)
+        coder.encode(token, forKey: APGIntent.coderToken)
     }
 }
 

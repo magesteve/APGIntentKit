@@ -7,9 +7,10 @@
 //  Utilities for MacOS App using Intents
 //
 
-#if os(macOS)
+#if canImport(AppKit)
 
-import Cocoa
+import Foundation
+import AppKit
 
 // MARK: - Class
 

@@ -8,9 +8,10 @@
 //  enabling and performing itself.
 //
 
-#if os(macOS)
+#if canImport(AppKit)
 
-import Cocoa
+import Foundation
+import AppKit
 
 // MARK: - Class
 
@@ -24,7 +25,7 @@ public final class APGIntentToolbarItem: NSToolbarItem {
     public let token: String
     
     /// Optional param data for action.
-    public var param: String = ""
+    public var param: String = String()
 
     /// Always on?
     public private(set) var alwaysOn: Bool = false
@@ -56,10 +57,10 @@ public final class APGIntentToolbarItem: NSToolbarItem {
         self.defaultShortName = token
         self.defaultLongName = token
         self.defaultDescription = token
-        self.baseSymbolName = kAPGIntentSymbolDefault
+        self.baseSymbolName = APGIntent.symbolDefault
         self.baseHint = token
 
-        let itemIdentifier = NSToolbarItem.Identifier(kAPGIntentKeyPrefix + token)
+        let itemIdentifier = NSToolbarItem.Identifier(APGIntent.keyPrefix + token)
         super.init(itemIdentifier: itemIdentifier)
 
         // Apply initial UI using defaults
@@ -88,8 +89,8 @@ public final class APGIntentToolbarItem: NSToolbarItem {
 
     /// Build an NSImage for the current mark state using cached symbol info.
     private func makeSymbolImage() -> NSImage? {
-        let symbolBase = baseSymbolName ?? kAPGIntentSymbolDefault
-        let name = currentlyMarked ? (symbolBase + kAPGIntentSymbolMark) : symbolBase
+        let symbolBase = baseSymbolName ?? APGIntent.symbolDefault
+        let name = currentlyMarked ? (symbolBase + APGIntent.symbolMark) : symbolBase
         return NSImage(systemSymbolName: name, accessibilityDescription: baseHint ?? defaultDescription)
     }
 

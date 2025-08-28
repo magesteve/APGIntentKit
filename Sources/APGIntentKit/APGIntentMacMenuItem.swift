@@ -8,9 +8,10 @@
 //  manages its own enabled state, and performs the associated action.
 //
 
-#if os(macOS)
+#if canImport(AppKit)
 
-import Cocoa
+import Foundation
+import AppKit
 
 // MARK: - Class
 

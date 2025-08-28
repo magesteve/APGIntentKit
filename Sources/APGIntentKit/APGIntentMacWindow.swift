@@ -8,9 +8,10 @@
 //  Menu actions and Toolbar Items.
 //
 
-#if os(macOS)
+#if canImport(AppKit)
 
-import Cocoa
+import Foundation
+import AppKit
 
 // MARK: - Class
 
@@ -106,17 +107,17 @@ public class APGIntentMacWindowHelper: NSObject, NSToolbarDelegate {
         listAllowed = []
         listDefaults.append(.flexibleSpace)
         for item in defaults {
-            let s = NSToolbarItem.Identifier(kAPGIntentKeyPrefix+item)
+            let s = NSToolbarItem.Identifier(APGIntent.keyPrefix+item)
             self.listDefaults.append(s)
             self.listAllowed.append(s)
         }
         for item in extras {
-            let s = NSToolbarItem.Identifier(kAPGIntentKeyPrefix+item)
+            let s = NSToolbarItem.Identifier(APGIntent.keyPrefix+item)
             self.listAllowed.append(s)
         }
         listAllowed.append(.flexibleSpace)
 
-        self.toolbarUnique = NSToolbar.Identifier(kAPGIntentKeyPrefix+unique)
+        self.toolbarUnique = NSToolbar.Identifier(APGIntent.keyPrefix+unique)
         
         let tb = NSToolbar(identifier: toolbarUnique)
         tb.allowsUserCustomization = true
@@ -141,9 +142,9 @@ public class APGIntentMacWindowHelper: NSObject, NSToolbarDelegate {
                         willBeInsertedIntoToolbar flag: Bool) -> NSToolbarItem? {
         var token = itemIdentifier.rawValue
 
-        guard token.hasPrefix(kAPGIntentKeyPrefix) else { return nil }
+        guard token.hasPrefix(APGIntent.keyPrefix) else { return nil }
         
-        token = String(token.dropFirst(kAPGIntentKeyPrefix.count))
+        token = String(token.dropFirst(APGIntent.keyPrefix.count))
         
         let item  = APGIntentToolbarItem(token: token, helper: self)
 

@@ -7,20 +7,6 @@
 //  Shared constants, types & protocols for Intent
 //
 
-// MARK: - Contants
-
-/// Default Symbol
-public let kAPGIntentSymbolDefault = "questionmark.square"
-
-/// Suffix to make symbol marked
-public let kAPGIntentSymbolMark = ".fill"
-
-/// Key to use for encoding/decoding a token field
-public let kAPGIntentCoderToken = "token"
-
-/// Prefix for Toolbar identifiers
-public let kAPGIntentKeyPrefix = "apgintent-"
-
 // MARK: - Typealias
 
 /// Simple closure with no results or paramts
@@ -41,7 +27,7 @@ public protocol APGIntentMacUIProtocol {
     func intentValidateUI()
 }
 
-#if os(macOS)
+#if canImport(AppKit)
 
 // MARK: - MacOS Only Protocol
 
