@@ -60,4 +60,13 @@ public struct APGIntent {
     /// Prefix for Toolbar identifiers
     public static let keyPrefix = "apgintent-"
 
+// MARK: - Static Functions
+    
+    @MainActor
+    public static func perform(token: String, param: String = String()) {
+        guard let action = APGIntentMacWindowHelper.findTopmostActionInfo(token: token) else { return }
+
+        action.actionBlock(param)
+
+    }
 }

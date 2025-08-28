@@ -62,11 +62,8 @@ public final class APGIntentMenuItem: NSMenuItem {
 
     /// Perform the associated intent's action using the topmost document (if any).
     @objc private func performIntent(_ sender: Any?) {
-        guard let action = APGIntentMacWindowHelper.findTopmostActionInfo(token: token) else { return }
-
-        action.actionBlock(param)
+        APGIntent.perform(token: token, param: param)
     }
-
 
 }
 
