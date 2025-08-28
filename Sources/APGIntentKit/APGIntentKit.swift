@@ -23,9 +23,9 @@ public struct APGIntent {
     public static let faq = "APG-faq"
     
     /// Show Get Started Window Intent
-    public static let features = "APG-getstarted"
+    public static let getStarted = "APG-getstarted"
     
-    /// Show Inpot Window Intent
+    /// Show Inpot Window Intent (misspelled on purpose)
     public static let inport = "APG-inport"
     
     /// Show New Doc Window Intent
@@ -33,6 +33,9 @@ public struct APGIntent {
     
     /// Show OpenDoc Window Intent
     public static let opendoc = "APG-opendoc"
+    
+    /// Show Promos Window Intent
+    public static let promos = "APG-promos"
     
     /// Show Settings Window Intent
     public static let settings = "APG-settings"
