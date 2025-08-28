@@ -369,8 +369,8 @@ A: Currently the adapters are macOS AppKit-based. SwiftUI and UIKit support are 
 The APGExample can be found at [Repository](https://github.com/magesteve/APGExample).
 
 ---
-
 ## License
 
 [MIT License](LICENSE)
+Created by **Steve Sheets**, 2025
 
