@@ -48,22 +48,10 @@ public struct APGIntentInfo: Hashable, Sendable {
     // MARK: - Computed Var
 
     /// Calculated short name
-    public var useShortName: String {
-        if let shortName {
-            return shortName
-        }
-        
-        return name
-    }
+    public var useShortName: String { shortName ?? name }
 
     /// Calculated long name
-    public var useLongName: String {
-        if let longName {
-            return longName
-        }
-        
-        return name
-    }
+    public var useLongName: String { longName ?? name }
 
     // MARK: - Initializer
 
@@ -128,6 +116,24 @@ public final class APGIntentInfoList {
         infoList.append(intentInfo)
     }
 
+    /// Replace an existing info with the same token, or add it if not found.
+    /// - Parameter intentInfo: The info to replace or add.
+    @discardableResult
+    public func replace(_ intentInfo: APGIntentInfo) -> Bool {
+        if let index = infoList.firstIndex(where: { $0.token == intentInfo.token }) {
+            infoList[index] = intentInfo
+            return true
+        } else {
+            infoList.append(intentInfo)
+            return false
+        }
+    }
+
+    /// Remove an info by token.
+    public func remove(token: String) {
+        infoList.removeAll { $0.token == token }
+    }
+    
     /// Add multiple infos to the list.
     /// - Parameter intents: An array of infos to append.
     public func add(contentsOf info: [APGIntentInfo]) {

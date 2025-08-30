@@ -3,7 +3,7 @@
 A lightweight Swift package for **standardizing UI commands** (menu items, toolbar items, buttons) around a simple **Intent** model.  
 It separates **what the UI shows** (name, hint, icon, shortcut) from **what it does** (closure to invoke, enable/disable, checkmark, and dynamic title), so you can declare commands once and reuse them across UI surfaces.
 
-Repository https://github.com/magesteve/APGIntentKit with current version **0.5.3**
+Repository https://github.com/magesteve/APGIntentKit with current version **0.5.4**
 
 - **Info** (`APGIntentInfo`) → UI-facing metadata (name, hint, SF Symbol, shortcut).
 - **Action** (`APGIntentAction`) → Behavior & appearance (perform closure + appearance closure).
