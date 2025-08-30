@@ -9,7 +9,7 @@ public struct APGIntent {
     // MARK: - Static Constants
     
     /// Version information of package
-    public static let version = "0.5.0"
+    public static let version = "0.5.3"
     
     // Intent ident Constants
     
@@ -29,7 +29,7 @@ public struct APGIntent {
     public static let inport = "APG-inport"
     
     /// Show New Doc Window Intent
-    public static let newDoc = "APG-NewDOc"
+    public static let newDoc = "APG-newdoc"
     
     /// Show OpenDoc Window Intent
     public static let opendoc = "APG-opendoc"
@@ -39,6 +39,12 @@ public struct APGIntent {
     
     /// Show Settings Window Intent
     public static let settings = "APG-settings"
+    
+    /// Show Debug Setting Window Intent
+    public static let debugsettings = "APG-debugsettings"
+    
+    /// Show Sound Setting Window Intent
+    public static let soundsetting = "APG-soundsettings"
     
     /// Show Welcome Window Intent
     public static let welcome = "APG-welcome"
