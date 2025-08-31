@@ -55,7 +55,7 @@ public final class APGIntentMenuItem: NSMenuItem {
 
     /// Required for NSCoding (not used directly).
     required init(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        fatalError(String())
     }
 
     // MARK: - Action Handler

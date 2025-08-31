@@ -9,7 +9,7 @@ public struct APGIntent {
     // MARK: - Static Constants
     
     /// Version information of package
-    public static let version = "0.5.4"
+    public static let version = "0.5.5"
     
     // Intent ident Constants
     
@@ -51,7 +51,10 @@ public struct APGIntent {
     
     /// Show What's New Window Intent
     public static let whatsnew = "APG-whatsnew"
-    
+
+    /// Debug Intent
+    public static let debug = "APG-debug"
+
     // Symbol constants
     
     /// Default Symbol
@@ -68,6 +71,13 @@ public struct APGIntent {
 
 // MARK: - Static Functions
     
+    /// calculte debug token #
+    @MainActor
+    public static func debugToken(_ number: Int) -> String {
+        return Self.debug+String(number)
+    }
+    
+    /// Perform this action if there for given token with given param.
     @MainActor
     public static func perform(token: String, param: String = String()) {
         guard let action = APGIntentMacWindowHelper.findTopmostActionInfo(token: token) else { return }
