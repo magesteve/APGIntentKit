@@ -9,7 +9,7 @@ public struct APGIntent {
     // MARK: - Static Constants
     
     /// Version information of package
-    public static let version = "0.5.5"
+    public static let version = "0.6.0"
     
     // Intent ident Constants
     
